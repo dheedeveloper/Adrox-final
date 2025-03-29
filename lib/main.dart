@@ -1,4 +1,6 @@
+import 'package:adrox/screens/Login/creatAccount/controller/confirmregistercontroller.dart';
 import 'package:adrox/screens/Login/creatAccount/controller/registercontroller.dart';
+import 'package:adrox/screens/Login/creatAccount/controller/verificationcontroller.dart';
 import 'package:adrox/screens/Login/signIn/controller/signincontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +14,8 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => SignInController()),
         ChangeNotifierProvider(create: (_) => RegisterController()),
+        ChangeNotifierProvider(create: (_) => ConfirmRegisterController()),
+        ChangeNotifierProvider(create: (_) => VerifyController()),
       ],
       child: MyApp(),
     ),

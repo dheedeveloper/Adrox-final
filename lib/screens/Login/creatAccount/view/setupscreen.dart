@@ -1,8 +1,12 @@
 import 'package:adrox/core/utility/Custom_Boxes.dart';
 import 'package:adrox/core/utility/images.dart';
+import 'package:adrox/core/utility/text.dart';
 import 'package:adrox/screens/Login/creatAccount/view/verifyscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/utility/Custom_text.dart';
 
 class SetupScreen extends StatefulWidget {
   const SetupScreen({super.key});
@@ -67,7 +71,7 @@ class _SetupScreenState extends State<SetupScreen> {
                         fontFamily: "Roboto-regular",
                         fontSize: 18.sp),
                   ),
-                  Image.asset(
+                  Image.network(
                     AppImage.qrCode,
                     height: 240,
                   ),
@@ -79,7 +83,7 @@ class _SetupScreenState extends State<SetupScreen> {
                         fontSize: 18.sp),
                   ),
                   Text(
-                    "0xDF563e3D98F2A0F3d6a5cbd048b0D40f88079756",
+                    DynamicStrings().secretCode,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
@@ -87,9 +91,15 @@ class _SetupScreenState extends State<SetupScreen> {
                       fontSize: 18.sp,
                     ),
                   ),
-                  Image.asset(
-                    AppImage.copyImg,
-                    height: 24,
+                  InkWell(
+                    onTap: () {
+                      Clipboard.setData(ClipboardData(text: DynamicStrings().secretCode));
+                      CustomText.instance.showToastSuccess("Text copied");
+                    },
+                    child: Image.asset(
+                      AppImage.copyImg,
+                      height: 24,
+                    ),
                   ),
                 ],
               ),

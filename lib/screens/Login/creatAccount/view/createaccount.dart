@@ -27,10 +27,19 @@ class _CreateAccountState extends State<CreateAccount> {
 
   void backupPhrase() async {
     final registerController = Provider.of<RegisterController>(context, listen: false);
-    await registerController.register(emailId.text,name.text.toString(),refferalId.text);
+
+    await registerController.register(emailId.text,name.text.toString(),"ADROX52344245001");
+
     if (registerController.registerData != null) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => const BackupPhrase()));
       CustomText.instance.showToastSuccess(registerController.registerData!.message.toString());
+      setState(() {
+        DynamicStrings().mnemonicPhrase=registerController.registerData!.data!.mnemonic.toString();
+        DynamicStrings().referralId=registerController.registerData!.data!.referralId.toString();
+        DynamicStrings().sponser_id=registerController.registerData!.data!.sponserId.toString();
+      });
+
+      print("Key >>> ${DynamicStrings().mnemonicPhrase}");
     } else {
       CustomText.instance.showToastFailure("Something went wrong !");
     }
@@ -173,7 +182,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             ),
                           ),
                           TextField(
-                            controller: emailId,
+                            controller: refferalId,
                             decoration: InputDecoration(
                                 hintText: "Enter Referral Id",
                                 hintStyle: TextStyle(
@@ -210,11 +219,11 @@ class _CreateAccountState extends State<CreateAccount> {
                               CustomBoxes.button(
                                   size: 182,
                                   onTap: () {
-                                    if(name.text.isEmpty||emailId.text.isEmpty||refferalId.text.isEmpty){
-                                    CustomText.instance.showToastFailure("Please give details");
-                                    }else{
+                                    // if(name.text.isEmpty||emailId.text.isEmpty||refferalId.text.isEmpty){
+                                    // CustomText.instance.showToastFailure("Please give details");
+                                    // }else{
                                       backupPhrase();
-                                    }
+                                    // }
                                   },
                                   text: "Next Step"),
                             ],

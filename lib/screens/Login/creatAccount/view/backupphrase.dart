@@ -1,8 +1,10 @@
 import 'package:adrox/core/constants/App_colors.dart';
 import 'package:adrox/core/utility/Custom_Boxes.dart';
+import 'package:adrox/core/utility/Custom_text.dart';
 import 'package:adrox/core/utility/images.dart';
 import 'package:adrox/core/utility/text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'confirmbackup.dart';
@@ -69,7 +71,7 @@ class _BackupPhraseState extends State<BackupPhrase> {
                       borderRadius: BorderRadius.circular(20.r),
                     ),
                     child: Column(
-                      spacing: 20,
+                      spacing: 25,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -96,14 +98,14 @@ class _BackupPhraseState extends State<BackupPhrase> {
                               fontWeight: FontWeight.w500),
                         ),
                         SizedBox(
-                          height: 200.h,
+                          height: 230.h,
                           child: GridView.builder(
                             physics: NeverScrollableScrollPhysics(),
-                            itemCount: 10,
+                            itemCount: 12,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
-                              mainAxisSpacing: 5.h,
+                              mainAxisSpacing: 4.h,
                               crossAxisSpacing: 5.w,
                               childAspectRatio: 120.w / 30.h,
                             ),
@@ -112,9 +114,11 @@ class _BackupPhraseState extends State<BackupPhrase> {
                                 borderRadius: BorderRadius.circular(20.r),
                                 border: Border.all(color: Colors.black45),
                               ),
-                              child: Center(
+                              child: Padding(
+                                padding:  EdgeInsets.symmetric(horizontal: 20.w,vertical: 8.h),
                                 child: Text(
-                                  "${index + 1}. letter",
+                                  textAlign: TextAlign.start,
+                                  "${index + 1}. ${DynamicStrings().mnemonicPhrase.split(" ")[index]}",
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontFamily: "Roboto-regular",
@@ -132,7 +136,10 @@ class _BackupPhraseState extends State<BackupPhrase> {
                               textColor: AppColors.primarycolor,
                               buttonColor: Colors.white,
                               size: 93,
-                              onTap: () {},
+                              onTap: () {
+                                Clipboard.setData(ClipboardData(text:DynamicStrings().mnemonicPhrase));
+                                CustomText.instance.showToastSuccess("Text copied");
+                              },
                               text: "Copy",
                             ),
                             CustomBoxes.button(

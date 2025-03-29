@@ -16,3 +16,21 @@ class StringValues {
   static String home =
       "Please download our new app to\nget more Features and Safety";
 }
+
+
+class DynamicStrings {
+  static final DynamicStrings _instance = DynamicStrings._internal();
+
+  factory DynamicStrings() {
+    return _instance;
+  }
+
+  DynamicStrings._internal();
+
+  String mnemonicPhrase = ""; // This will now persist
+  String referralId = ""; // This will now persist
+  String sponser_id = ""; // This will now persist
+  String qrImg = ""; // This will now persist
+  String secretCode = ""; // This will now persist
+}
+

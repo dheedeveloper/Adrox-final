@@ -3,6 +3,7 @@ import 'package:adrox/core/constants/apiservice.dart';
 import 'package:adrox/core/utility/Custom_Boxes.dart';
 import 'package:adrox/core/utility/images.dart';
 import 'package:adrox/core/utility/text.dart';
+import 'package:adrox/screens/Landing/homemenu/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -28,12 +29,15 @@ class _SignInScreenState extends State<SignInScreen> {
 
     // await signInController.signIn(walletAddress.text, mnemonicKey.text);
     await signInController.signIn("0x500CB57fF6eb7EF34DBc694858a590B53d5E81C9",
-    "loan acid egg term rude caution cost snow oblige gorilla card angle");
+    "loan acid egg term rude caution cost snow oblige gorilla card angle","");
 
     if (signInController.signInData != null) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const VerifyScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
       CustomText.instance.showToastSuccess(signInController.signInData!.message.toString());
     } else {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => VerifyScreen(
+        wallet: walletAddress.text,mnemonic: mnemonicKey.text,
+      )));
       CustomText.instance.showToastFailure("Something went wrong !");
     }
   }

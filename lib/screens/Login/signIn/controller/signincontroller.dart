@@ -13,12 +13,13 @@ class SignInController with ChangeNotifier {
   SignInModel? get signInData => _signInData;
 
   // API call function for user sign-in
-  Future<void> signIn(String walletAddress, String mnemonicKey) async {
+  Future<void> signIn(String walletAddress, String mnemonicKey,String code) async {
     _setLoading(true);
 
     Map<String, String> requestData = {
       "walletAddress": walletAddress,
       "mnemonicKey": mnemonicKey,
+      "twofaCode":code
     };
 
     final response = await ApiService.postRequest(ApiConstants.loginUser, requestData);

@@ -32,5 +32,6 @@ class DynamicStrings {
   String sponser_id = ""; // This will now persist
   String qrImg = ""; // This will now persist
   String secretCode = ""; // This will now persist
+  String token = ""; // This will now persist
 }
 

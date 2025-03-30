@@ -2,7 +2,10 @@ import 'dart:async';
 import 'package:adrox/core/constants/App_colors.dart';
 import 'package:adrox/core/utility/Navigation_Helper.dart';
 import 'package:adrox/core/utility/images.dart';
-import 'package:adrox/screens/Landing/lendingMenu/lendingscreen.dart';
+import 'package:adrox/core/utility/localstorage.dart';
+import 'package:adrox/core/utility/text.dart';
+import 'package:adrox/screens/Landing/homemenu/view/homescreen.dart';
+import 'package:adrox/screens/Landing/lendingMenu/view/lendingscreen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,20 +31,36 @@ class _SplashScreenState extends State<SplashScreen> {
   // }
   double progress = 0.0;
   void _startLoading() {
-    Timer.periodic(Duration(milliseconds: 500), (timer) {
+    Timer.periodic(Duration(milliseconds: 500), (timer) async {
       setState(() {
         if (progress < 1.0) {
           progress += 0.1;
         } else {
           timer.cancel();
-
-          NavigationHelper.navigateAndRemoveUntil(
-            context: context,
-            page: LandingScreen(),
-          );
+          _navigateBasedOnAuthToken(); // Call async function to check auth token
         }
       });
     });
+  }
+
+  Future<void> _navigateBasedOnAuthToken() async {
+    String? authToken = await SharedPrefHelper.getString("AuthToken");
+    setState(() {
+      DynamicStrings().token=authToken!;
+    });
+    print(">>>>>>>>>>>>>>>>> AuthToken: $authToken");
+
+    if (authToken == null || authToken.trim().isEmpty) {
+      NavigationHelper.navigateAndRemoveUntil(
+        context: context,
+        page: LandingScreen(),
+      );
+    } else {
+      NavigationHelper.navigateAndRemoveUntil(
+        context: context,
+        page: HomeScreen(),
+      );
+    }
   }
 
   @override

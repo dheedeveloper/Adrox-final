@@ -1,7 +1,7 @@
 import 'package:adrox/core/utility/Custom_Boxes.dart';
 import 'package:adrox/core/utility/images.dart';
 import 'package:adrox/core/utility/text.dart';
-import 'package:adrox/screens/Landing/lendingMenu/lendingscreen.dart';
+import 'package:adrox/screens/Landing/lendingMenu/view/lendingscreen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

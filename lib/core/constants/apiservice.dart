@@ -59,6 +59,67 @@ class ApiService {
       return {"error": "Network Error", "details": e.toString()};
     }
   }
+
+  static Future<dynamic> postRequestWithHeaders(String url, Map<String, dynamic> requestData, Map<String, String> headers) async {
+    print("POST Request URL--------: $url");
+    print("Request Data------------: ${jsonEncode(requestData)}");
+    print("Headers ----------------: $headers");
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+          ...headers, // Merging additional headers
+        },
+        body: jsonEncode(requestData),
+      );
+
+      print("Response Status---------------: ${response.statusCode}");
+      print("Response Body ----------------: ${response.body}");
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return jsonDecode(response.body);
+      } else {
+        return {
+          "error": "Failed to send data",
+          "statusCode": response.statusCode,
+          "message": response.body
+        };
+      }
+    } catch (e) {
+      print("POST Request Error: $e");
+      return {"error": "Network Error", "details": e.toString()};
+    }
+  }
+
+  static Future<dynamic> getRequestWithHeaders(String url, Map<String, String> headers) async {
+    print("GET Request URL--------: $url");
+    print("Request Headers--------: ${headers.toString()}");
+
+    try {
+      final response = await http.get(
+        Uri.parse(url),
+        headers: headers, // Sending only headers
+      );
+
+      print("Response Status---------------: ${response.statusCode}");
+      print("Response Body ----------------: ${response.body.toString()}");
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return jsonDecode(response.body);
+      } else {
+        return {
+          "error": "Failed to fetch data",
+          "statusCode": response.statusCode,
+          "message": response.body
+        };
+      }
+    } catch (e) {
+      print("GET Request Error: $e");
+      return {"error": "Network Error", "details": e.toString()};
+    }
+  }
 }
 
 

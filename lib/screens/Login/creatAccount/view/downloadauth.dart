@@ -3,6 +3,7 @@ import 'package:adrox/core/utility/images.dart';
 import 'package:adrox/screens/Login/creatAccount/view/setupscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DownloadAuth extends StatefulWidget {
   const DownloadAuth({super.key});
@@ -18,6 +19,18 @@ class _DownloadAuthState extends State<DownloadAuth> {
         MaterialPageRoute(
           builder: (context) => const SetupScreen(),
         ));
+  }
+
+  final String playStoreUrl = "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&pcampaignid=web_share";
+
+  void _launchURL() async {
+    final Uri url = Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2");
+
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -69,42 +82,47 @@ class _DownloadAuthState extends State<DownloadAuth> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          height: 50.h,
-                          width: 130.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15.r),
-                              color: Colors.grey.shade300),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Image.asset(AppImage.playStore),
-                              RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text:
-                                          "Available on\n", // Top text with smaller font size
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: "Roboto-medium",
-                                        fontSize: 10.sp, // Smaller font size
+                        InkWell(
+                          onTap:() {
+                                _launchURL();
+                          },
+                          child: Container(
+                            height: 50.h,
+                            width: 130.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.r),
+                                color: Colors.grey.shade300),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset(AppImage.playStore),
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            "Available on\n", // Top text with smaller font size
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: "Roboto-medium",
+                                          fontSize: 10.sp, // Smaller font size
+                                        ),
                                       ),
-                                    ),
-                                    TextSpan(
-                                      text:
-                                          "Play Store", // Bottom text with larger font size
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: "Roboto-medium",
-                                        fontSize: 16.sp, // Larger font size
-                                        fontWeight: FontWeight.bold,
+                                      TextSpan(
+                                        text:
+                                            "Play Store", // Bottom text with larger font size
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: "Roboto-medium",
+                                          fontSize: 16.sp, // Larger font size
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         Container(

@@ -1,11 +1,11 @@
 [
     {
-        "merged": "com.example.adrox.adrox.app-debug-6:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "com.example.adrox.adrox.app-main-1:/mipmap-xhdpi/ic_launcher.png"
-    },
-    {
         "merged": "com.example.adrox.adrox.app-debug-6:/drawable-v21_launch_background.xml.flat",
         "source": "com.example.adrox.adrox.app-main-1:/drawable-v21/launch_background.xml"
+    },
+    {
+        "merged": "com.example.adrox.adrox.app-debug-6:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.example.adrox.adrox.app-main-1:/mipmap-xhdpi/ic_launcher.png"
     },
     {
         "merged": "com.example.adrox.adrox.app-debug-6:/mipmap-hdpi_ic_launcher.png.flat",

@@ -28,7 +28,7 @@ class _CreateAccountState extends State<CreateAccount> {
   void backupPhrase() async {
     final registerController = Provider.of<RegisterController>(context, listen: false);
 
-    await registerController.register(emailId.text,name.text.toString(),"ADROX52344245001");
+    await registerController.register(emailId.text,name.text.toString(),refferalId.text);
 
     if (registerController.registerData != null) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => const BackupPhrase()));

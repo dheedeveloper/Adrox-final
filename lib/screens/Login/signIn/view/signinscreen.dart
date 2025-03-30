@@ -2,12 +2,15 @@ import 'package:adrox/core/constants/App_colors.dart';
 import 'package:adrox/core/constants/apiservice.dart';
 import 'package:adrox/core/utility/Custom_Boxes.dart';
 import 'package:adrox/core/utility/images.dart';
+import 'package:adrox/core/utility/localstorage.dart';
 import 'package:adrox/core/utility/text.dart';
-import 'package:adrox/screens/Landing/homemenu/homescreen.dart';
+import 'package:adrox/screens/Landing/homemenu/view/homescreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/utility/Custom_text.dart';
 import '../../creatAccount/view/verifyscreen.dart';
@@ -23,7 +26,6 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final walletAddress = TextEditingController();
   final mnemonicKey = TextEditingController();
-
   void verifyScreen() async {
     final signInController = Provider.of<SignInController>(context, listen: false);
 
@@ -33,6 +35,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     if (signInController.signInData != null) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+      SharedPrefHelper.saveString("AuthToken", signInController.signInData!.data.toString());
       CustomText.instance.showToastSuccess(signInController.signInData!.message.toString());
     } else {
       Navigator.push(context, MaterialPageRoute(builder: (context) => VerifyScreen(
@@ -167,7 +170,12 @@ class _SignInScreenState extends State<SignInScreen> {
                                   suffixIcon: Padding(
                                     padding: EdgeInsets.only(bottom: 40.h),
                                     child: TextButton(
-                                        onPressed: () {},
+                                        onPressed: () async{
+                                          ClipboardData? clipboardData = await Clipboard.getData(Clipboard.kTextPlain);
+                                          if (clipboardData != null) {
+                                            mnemonicKey.text = clipboardData.text!;
+                                          }
+                                        },
                                         child: Text(
                                           'Paste',
                                           style: TextStyle(

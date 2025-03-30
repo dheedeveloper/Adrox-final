@@ -10,12 +10,15 @@ class ApiConstants{
   static String userLending = "https://adrox-node-22357d774678.herokuapp.com/api/user/lending";
   static String lendingConfirm = "https://adrox-node-22357d774678.herokuapp.com/api/user/lending-confirmation";
   static String lendingHistory = "https://adrox-node-22357d774678.herokuapp.com/api/user/history-api";
-  // static String loginTwo = "";
-  // static String loginTwo = "";
-  // static String loginTwo = "";
-  // static String loginTwo = "";
-  // static String loginTwo = "";
-  // static String loginTwo = "";
-  // static String loginTwo = "";
-
+  static String profitPage = "https://adrox-node-22357d774678.herokuapp.com/api/history/history-profit";
+  static String profitLendingBonus = "https://adrox-node-22357d774678.herokuapp.com/api/history/history-lendingprofit";
+  static String profitLendingHistory = "https://adrox-node-22357d774678.herokuapp.com/api/history/history-lendingprofithistory";
+  static String profitRank = "https://adrox-node-22357d774678.herokuapp.com/api/history/history-profitrank";
+  static String activeTeam = "https://adrox-node-22357d774678.herokuapp.com/api/history/history-profitteam";
+  static String inactiveTeam = "https://adrox-node-22357d774678.herokuapp.com/api/history/history-profitteaminactive";
+  static String leftPool = "https://adrox-node-22357d774678.herokuapp.com/api/history/history-profitinfoleft";
+  static String rightPool = "https://adrox-node-22357d774678.herokuapp.com/api/history/history-profitinforight";
+  static String profitReferral = "https://adrox-node-22357d774678.herokuapp.com/api/history/history-profitinforeferral";
+  static String referralTwo = "https://adrox-node-22357d774678.herokuapp.com/api/history/history-profitinforeferraltwo";
+  static String collab = "https://adrox-node-22357d774678.herokuapp.com/api/history/history-profitcollab";
 }

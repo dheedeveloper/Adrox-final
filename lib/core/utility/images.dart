@@ -36,6 +36,13 @@ class AppImage {
   static String setting = "assets/images/settings.png";
   static String announcement = "assets/images/announcement.png";
   static String whitePaper = "assets/images/whitepaper.png";
+  static String project = "assets/images/project.png";
+  static String support = "assets/images/support.png";
+  static String roadMap = "assets/images/roadmap.png";
+  static String games = "assets/images/games.png";
+  static String education = "assets/images/education.png";
+  static String ecommerce = "assets/images/ecommerce.png";
+  static String aiRobo = "assets/images/airobo.png";
   static String profitSelect = "assets/images/profit_select.png";
   static String profitDis = "assets/images/profit_dis.png";
   static String lendingSelect = "assets/images/lending_select.png";
@@ -49,7 +56,7 @@ class AppImage {
   static String referral = "assets/images/referral.png";
   static String team = "assets/images/team.png";
   static String falling = "assets/images/falling.png";
-  static String purse = "assets/images/purse.png";
+  static String purse = "assets/images/purseimg.png";
   static String background = "assets/images/background.png";
   static String bluebg = "assets/images/bluebg.png";
 }

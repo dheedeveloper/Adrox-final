@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/utility/Custom_text.dart';
-import '../../../Landing/homemenu/homescreen.dart';
+import '../../../Landing/homemenu/view/homescreen.dart';
 import '../../signIn/controller/signincontroller.dart';
 import 'disablescreen.dart';
 
@@ -149,7 +149,6 @@ class _VerifyScreenState extends State<VerifyScreen> {
                                 suffixIcon: Image.asset(
                                   AppImage.copyImg,
                                   height: 5,
-
                                 ),
                                 hintText: "Enter 2fa code",
                                 hintStyle: TextStyle(

@@ -1,3 +1,8 @@
+import 'package:adrox/screens/Landing/homemenu/controller/homescreencontroller.dart';
+import 'package:adrox/screens/Landing/lendingMenu/controller/confirmlendingcontroller.dart';
+import 'package:adrox/screens/Landing/lendingMenu/controller/lendingcontroller.dart';
+import 'package:adrox/screens/Landing/lendingMenu/controller/lendinghistorycontroller.dart';
+import 'package:adrox/screens/Landing/profitMenu/controller/profitcontroller.dart';
 import 'package:adrox/screens/Login/creatAccount/controller/confirmregistercontroller.dart';
 import 'package:adrox/screens/Login/creatAccount/controller/registercontroller.dart';
 import 'package:adrox/screens/Login/creatAccount/controller/verificationcontroller.dart';
@@ -16,6 +21,11 @@ void main() {
         ChangeNotifierProvider(create: (_) => RegisterController()),
         ChangeNotifierProvider(create: (_) => ConfirmRegisterController()),
         ChangeNotifierProvider(create: (_) => VerifyController()),
+        ChangeNotifierProvider(create: (_) => HomeScreenController()),
+        ChangeNotifierProvider(create: (_) => LendingController()),
+        ChangeNotifierProvider(create: (_) => LendingHistoryController()),
+        ChangeNotifierProvider(create: (_) => ProfitController()),
+        ChangeNotifierProvider(create: (_) => ConfirmLendingController()),
       ],
       child: MyApp(),
     ),

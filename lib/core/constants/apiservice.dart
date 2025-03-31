@@ -60,7 +60,7 @@ class ApiService {
     }
   }
 
-  static Future<dynamic> postRequestWithHeaders(String url, Map<String, dynamic> requestData, Map<String, String> headers) async {
+  static Future<dynamic> postRequestWithBodyHeaders(String url, Map<String, dynamic> requestData, Map<String, String> headers) async {
     print("POST Request URL--------: $url");
     print("Request Data------------: ${jsonEncode(requestData)}");
     print("Headers ----------------: $headers");
@@ -73,6 +73,37 @@ class ApiService {
           ...headers, // Merging additional headers
         },
         body: jsonEncode(requestData),
+      );
+
+      print("Response Status---------------: ${response.statusCode}");
+      print("Response Body ----------------: ${response.body}");
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return jsonDecode(response.body);
+      } else {
+        return {
+          "error": "Failed to send data",
+          "statusCode": response.statusCode,
+          "message": response.body
+        };
+      }
+    } catch (e) {
+      print("POST Request Error: $e");
+      return {"error": "Network Error", "details": e.toString()};
+    }
+  }
+
+  static Future<dynamic> postRequestWithHeader(String url, Map<String, String> headers) async {
+    print("POST Request URL--------: $url");
+    print("Headers ----------------: $headers");
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+          ...headers, // Merging additional headers
+        },
       );
 
       print("Response Status---------------: ${response.statusCode}");

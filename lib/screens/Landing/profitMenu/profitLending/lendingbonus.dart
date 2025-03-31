@@ -1,6 +1,11 @@
+import 'package:adrox/core/constants/apiservice.dart';
+import 'package:adrox/screens/Landing/profitMenu/controller/profitlendingcontroller.dart';
 import 'package:adrox/screens/Landing/profitMenu/profitLending/profitlendhistory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../core/utility/text.dart';
 
 class LendingBonus extends StatefulWidget {
   const LendingBonus({super.key});
@@ -13,9 +18,15 @@ class _LendingBonusState extends State<LendingBonus>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
+  void apiCall() async {
+    final profitLendingController = Provider.of<ProfitLendingController>(context, listen: false);
+    await profitLendingController.profitLendingApiCall(DynamicStrings().token);
+  }
+
   @override
   void initState() {
     super.initState();
+    apiCall();
     _tabController = TabController(length: 2, vsync: this);
   }
 
@@ -35,53 +46,55 @@ class _LendingBonusState extends State<LendingBonus>
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 300.w,
-              child: Row(
-                children: [
-                  IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: Icon(Icons.keyboard_backspace_rounded)),
-                  Expanded(
-                    child: TabBar(
-                      controller: _tabController,
-                      labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontFamily: "Roboto-medium",
-                          fontSize: 14.sp),
-                      unselectedLabelStyle: TextStyle(
-                          color: Colors.black,
-                          fontFamily: "Roboto-regular",
-                          fontSize: 14.sp),
-                      indicatorColor: const Color(0xff3F5FF2), // Blue underline
-                      labelColor: Colors.black, // Selected text color
-                      unselectedLabelColor:
-                          Colors.black, // Unselected text color
-                      indicatorWeight: 3, // Thickness of underline
-                      tabs: const [
-                        Tab(text: "Lending Bonus"),
-                        Tab(
-                          text: "Lending History",
-                        ),
-                      ],
+      child: Consumer<ProfitLendingController>(builder: (context, value, child) =>
+          value.isLoading||value.profitLendingData==null?DataLoader():Scaffold(
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 300.w,
+                child: Row(
+                  children: [
+                    IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: Icon(Icons.keyboard_backspace_rounded)),
+                    Expanded(
+                      child: TabBar(
+                        controller: _tabController,
+                        labelStyle: TextStyle(
+                            color: Colors.black,
+                            fontFamily: "Roboto-medium",
+                            fontSize: 14.sp),
+                        unselectedLabelStyle: TextStyle(
+                            color: Colors.black,
+                            fontFamily: "Roboto-regular",
+                            fontSize: 14.sp),
+                        indicatorColor: const Color(0xff3F5FF2), // Blue underline
+                        labelColor: Colors.black, // Selected text color
+                        unselectedLabelColor:
+                            Colors.black, // Unselected text color
+                        indicatorWeight: 3, // Thickness of underline
+                        tabs: const [
+                          Tab(text: "Lending Bonus"),
+                          Tab(
+                            text: "Lending History",
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
 
-            /// TabBarView
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: const [LendingBonusTab(), ProfitLendHistory()],
+              /// TabBarView
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: const [LendingBonusTab(), ProfitLendHistory()],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

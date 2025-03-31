@@ -32,7 +32,7 @@ class ConfirmLendingController with ChangeNotifier {
 
       Map<String, String> requestData = {"package_id":package_id,"user_amount":user_amount};
 
-      final response = await ApiService.postRequestWithHeaders(ApiConstants.lendingConfirm,requestData,headers);
+      final response = await ApiService.postRequestWithBodyHeaders(ApiConstants.lendingConfirm,requestData,headers);
 
       if (response != null && response is Map<String, dynamic>) {
         if (response.containsKey("error")) {

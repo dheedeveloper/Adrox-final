@@ -34,20 +34,24 @@ class HomeScreenModel {
 
 class Data {
   List<Banner>? banner;
+  List<Link>? links;
   List<CoinList>? coinList;
 
   Data({
     this.banner,
+    this.links,
     this.coinList,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     banner: json["banner"] == null ? [] : List<Banner>.from(json["banner"]!.map((x) => Banner.fromJson(x))),
+    links: json["links"] == null ? [] : List<Link>.from(json["links"]!.map((x) => Link.fromJson(x))),
     coinList: json["coin_list"] == null ? [] : List<CoinList>.from(json["coin_list"]!.map((x) => CoinList.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "banner": banner == null ? [] : List<dynamic>.from(banner!.map((x) => x.toJson())),
+    "links": links == null ? [] : List<dynamic>.from(links!.map((x) => x.toJson())),
     "coin_list": coinList == null ? [] : List<dynamic>.from(coinList!.map((x) => x.toJson())),
   };
 }
@@ -135,6 +139,26 @@ final networkValues = EnumValues({
   "eth": Network.ETH,
   "trx": Network.TRX
 });
+
+class Link {
+  String? name;
+  String? url;
+
+  Link({
+    this.name,
+    this.url,
+  });
+
+  factory Link.fromJson(Map<String, dynamic> json) => Link(
+    name: json["name"],
+    url: json["url"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "name": name,
+    "url": url,
+  };
+}
 
 class EnumValues<T> {
   Map<String, T> map;

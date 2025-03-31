@@ -94,7 +94,7 @@ class _ProfitHomeTabState extends State<ProfitHomeTab> {
                     fontFamily: "Roboto-regular",
                     fontSize: 15.sp,
                   )),
-              Text("",
+              Text(value.profitData!.data!.lending!.totalLending.toString(),
                   style: TextStyle(
                     color: Colors.black,
                     fontFamily: "Roboto-regular",
@@ -159,12 +159,11 @@ class _ProfitHomeTabState extends State<ProfitHomeTab> {
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 18.w),
-                            child: Text(
-                              "1200 ADX",
+                            child: Text(value.profitData!.data!.values![index].title.toString(),
                               style: TextStyle(
                                 color: Colors.black,
-                                fontFamily: "Roboto-regular",
-                                fontSize: 18.sp,
+                                fontFamily: "Roboto-medium",
+                                fontSize: 16.sp,
                               ),
                             ),
                           ),
@@ -181,12 +180,11 @@ class _ProfitHomeTabState extends State<ProfitHomeTab> {
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 18.w),
-                            child: Text(
-                              "1200 ADX",
+                            child: Text(value.profitData!.data!.values![index].value.toString(),
                               style: TextStyle(
                                 color: Colors.black,
-                                fontFamily: "Roboto-regular",
-                                fontSize: 18.sp,
+                                fontFamily: "Roboto-medium",
+                                fontSize: 16.sp,
                               ),
                             ),
                           ),

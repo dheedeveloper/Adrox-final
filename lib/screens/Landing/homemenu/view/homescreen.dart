@@ -10,6 +10,7 @@ import 'package:adrox/core/utility/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -197,20 +198,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
-                          Container(
-                            padding: EdgeInsets.all(10.h),
-                            height: 50.h,
-                            width: 50.h,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black12),
-                              borderRadius: BorderRadius.circular(15.r),
-                            ),
-                            child: ClipRRect(
-                              child: Image.asset(
-                                imgs[index],
-                                height: 10.h, // Adjust height to make image smaller
-                                width: 10.h, // Adjust width to make image smaller
-                                fit: BoxFit.contain, // Ensures image fits inside the container
+                          InkWell( onTap: () async {
+                            final Uri url = Uri.parse(value.homeData!.data!.links![index].url.toString());
+                            if (await canLaunchUrl(url)) {
+                              await launchUrl(
+                                url,
+                                mode: LaunchMode.externalApplication, // Open in Chrome
+                              );
+                            } else {
+                              print("Could not launch $url");
+                            }
+                          },
+                            child: Container(
+                              padding: EdgeInsets.all(10.h),
+                              height: 50.h,
+                              width: 50.h,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black12),
+                                borderRadius: BorderRadius.circular(15.r),
+                              ),
+                              child: ClipRRect(
+                                child: Image.asset(
+                                  imgs[index],
+                                  height: 10.h, // Adjust height to make image smaller
+                                  width: 10.h, // Adjust width to make image smaller
+                                  fit: BoxFit.contain, // Ensures image fits inside the container
+                                ),
                               ),
                             ),
                           ),

@@ -53,7 +53,7 @@ class Data {
 }
 
 class Lending {
-  String? totalBonus;
+  List<String>? totalBonus;
   String? totalLending;
 
   Lending({
@@ -62,64 +62,32 @@ class Lending {
   });
 
   factory Lending.fromJson(Map<String, dynamic> json) => Lending(
-    totalBonus: json["total_bonus"],
+    totalBonus: json["total_bonus"] == null ? [] : List<String>.from(json["total_bonus"]!.map((x) => x)),
     totalLending: json["total_lending"],
   );
 
   Map<String, dynamic> toJson() => {
-    "total_bonus": totalBonus,
+    "total_bonus": totalBonus == null ? [] : List<dynamic>.from(totalBonus!.map((x) => x)),
     "total_lending": totalLending,
   };
 }
 
 class Value {
-  String? rankName;
-  String? currentMonth;
-  String? activeount;
-  String? inactivecount;
-  String? leftpool;
-  String? rightpool;
-  String? directincome;
-  String? levelincome;
-  String? todayincent;
-  String? totalcollabincent;
+  String? title;
+  String? value;
 
   Value({
-    this.rankName,
-    this.currentMonth,
-    this.activeount,
-    this.inactivecount,
-    this.leftpool,
-    this.rightpool,
-    this.directincome,
-    this.levelincome,
-    this.todayincent,
-    this.totalcollabincent,
+    this.title,
+    this.value,
   });
 
   factory Value.fromJson(Map<String, dynamic> json) => Value(
-    rankName: json["Rank_Name"],
-    currentMonth: json["Current_month"],
-    activeount: json["Activeount"],
-    inactivecount: json["inactivecount"],
-    leftpool: json["Leftpool"],
-    rightpool: json["Rightpool"],
-    directincome: json["Directincome"],
-    levelincome: json["Levelincome"],
-    todayincent: json["Todayincent"],
-    totalcollabincent: json["totalcollabincent"],
+    title: json["title"],
+    value: json["value"],
   );
 
   Map<String, dynamic> toJson() => {
-    "Rank_Name": rankName,
-    "Current_month": currentMonth,
-    "Activeount": activeount,
-    "inactivecount": inactivecount,
-    "Leftpool": leftpool,
-    "Rightpool": rightpool,
-    "Directincome": directincome,
-    "Levelincome": levelincome,
-    "Todayincent": todayincent,
-    "totalcollabincent": totalcollabincent,
+    "title": title,
+    "value": value,
   };
 }

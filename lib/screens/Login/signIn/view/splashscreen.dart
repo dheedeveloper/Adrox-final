@@ -45,20 +45,24 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _navigateBasedOnAuthToken() async {
     String? authToken = await SharedPrefHelper.getString("AuthToken");
-    setState(() {
-      DynamicStrings().token=authToken!;
-    });
-    print(">>>>>>>>>>>>>>>>> AuthToken: $authToken");
 
-    if (authToken == null || authToken.trim().isEmpty) {
-      NavigationHelper.navigateAndRemoveUntil(
-        context: context,
-        page: LandingScreen(),
-      );
-    } else {
+    if (authToken != null && authToken.trim().isNotEmpty) {
+      setState(() {
+        DynamicStrings().token = authToken;
+      });
+
+      print(">>>>>>>>>>>>>>>>> AuthToken: $authToken");
+
       NavigationHelper.navigateAndRemoveUntil(
         context: context,
         page: HomeScreen(),
+      );
+    } else {
+      print("No AuthToken found, navigating to LandingScreen");
+
+      NavigationHelper.navigateAndRemoveUntil(
+        context: context,
+        page: LandingScreen(),
       );
     }
   }

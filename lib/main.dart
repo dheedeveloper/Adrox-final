@@ -2,7 +2,17 @@ import 'package:adrox/screens/Landing/homemenu/controller/homescreencontroller.d
 import 'package:adrox/screens/Landing/lendingMenu/controller/confirmlendingcontroller.dart';
 import 'package:adrox/screens/Landing/lendingMenu/controller/lendingcontroller.dart';
 import 'package:adrox/screens/Landing/lendingMenu/controller/lendinghistorycontroller.dart';
+import 'package:adrox/screens/Landing/profitMenu/controller/activeteamcontroller.dart';
+import 'package:adrox/screens/Landing/profitMenu/controller/collabcontroller.dart';
+import 'package:adrox/screens/Landing/profitMenu/controller/inactiveteamcontroller.dart';
+import 'package:adrox/screens/Landing/profitMenu/controller/leftpoolcontroller.dart';
 import 'package:adrox/screens/Landing/profitMenu/controller/profitcontroller.dart';
+import 'package:adrox/screens/Landing/profitMenu/controller/profitlendingcontroller.dart';
+import 'package:adrox/screens/Landing/profitMenu/controller/proflendhistorycontroller.dart';
+import 'package:adrox/screens/Landing/profitMenu/controller/rankcontroller.dart';
+import 'package:adrox/screens/Landing/profitMenu/controller/referralcontroller.dart';
+import 'package:adrox/screens/Landing/profitMenu/controller/rightpoolcontroller.dart';
+import 'package:adrox/screens/Landing/profitMenu/controller/secondreferralcontroller.dart';
 import 'package:adrox/screens/Login/creatAccount/controller/confirmregistercontroller.dart';
 import 'package:adrox/screens/Login/creatAccount/controller/registercontroller.dart';
 import 'package:adrox/screens/Login/creatAccount/controller/verificationcontroller.dart';
@@ -26,6 +36,16 @@ void main() {
         ChangeNotifierProvider(create: (_) => LendingHistoryController()),
         ChangeNotifierProvider(create: (_) => ProfitController()),
         ChangeNotifierProvider(create: (_) => ConfirmLendingController()),
+        ChangeNotifierProvider(create: (_) => ProfitLendingController()),
+        ChangeNotifierProvider(create: (_) => ProfitLendHistoryController()),
+        ChangeNotifierProvider(create: (_) => RankController()),
+        ChangeNotifierProvider(create: (_) => ActiveTeamController()),
+        ChangeNotifierProvider(create: (_) => InActiveController()),
+        ChangeNotifierProvider(create: (_) => LeftPoolController()),
+        ChangeNotifierProvider(create: (_) => RightPoolController()),
+        ChangeNotifierProvider(create: (_) => ReferralController()),
+        ChangeNotifierProvider(create: (_) => SecondReferralController()),
+        ChangeNotifierProvider(create: (_) => CollabController()),
       ],
       child: MyApp(),
     ),

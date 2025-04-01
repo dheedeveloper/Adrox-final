@@ -1,36 +1,36 @@
 import 'package:adrox/core/constants/apiservice.dart';
-import 'package:adrox/screens/Landing/profitMenu/controller/rightpoolcontroller.dart';
+import 'package:adrox/screens/Landing/profitMenu/controller/secondreferralcontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/utility/text.dart';
 
-class RightPool extends StatefulWidget {
-  const RightPool({super.key});
+class SecondReferralScreen extends StatefulWidget {
+  const SecondReferralScreen({super.key});
 
   @override
-  State<RightPool> createState() => _RightPoolState();
+  State<SecondReferralScreen> createState() => _SecondReferralScreenState();
 }
 
-class _RightPoolState extends State<RightPool> {
+class _SecondReferralScreenState extends State<SecondReferralScreen> {
   String selectedValue = "Last Month";
 
-  void apiCall(filterDate) async {
-    final rightPoolController = Provider.of<RightPoolController>(context, listen: false);
-    await rightPoolController.rightPoolApiCall(DynamicStrings().token,filterDate);
+  void apiCall(filterDate,filterLevel) async {
+    final secondRefController = Provider.of<SecondReferralController>(context, listen: false);
+    await secondRefController.secondRefApiCall(DynamicStrings().token,filterDate,filterLevel);
   }
 
   @override
   void initState() {
-    apiCall("all");
+    apiCall("all","2");
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RightPoolController>(
-      builder: (context, value, child) => value.isLoading || value.rightPoolData==null ?DataLoader() : Container(
+    return Consumer<SecondReferralController>(
+      builder: (context, value, child) => value.isLoading || value.secondRefData==null ? DataLoader() : Container(
         height: double.infinity,width: double.infinity.w,padding: EdgeInsets.all(20.h),
         child: Column(
           crossAxisAlignment:CrossAxisAlignment.start,
@@ -102,7 +102,8 @@ class _RightPoolState extends State<RightPool> {
                   ),
                 )
               ],
-            ),          SizedBox(height: 15.h,),
+            ),
+            SizedBox(height: 15.h,),
             Text("Today",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
             Expanded(
               child: ListView.builder(
@@ -113,28 +114,31 @@ class _RightPoolState extends State<RightPool> {
                     padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 15.h),
                     height: 70.h,width: double.infinity,decoration: BoxDecoration(border: Border.all(color: Colors.black54),
                       borderRadius: BorderRadius.circular(15.w)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        Container(
+                            height: 40.h,width: 40.h,decoration: BoxDecoration(color: Colors.lightGreen.shade50,
+                            borderRadius: BorderRadius.circular(10.r)),
+                            child: Icon(Icons.arrow_downward_rounded,color: Colors.green.shade600,)),
+                        SizedBox(width: 16.w,),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("50 ADX",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 14.sp,)),
-                                Text("Executive",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
-                              ],),
-                            Spacer(),
-                            Container(
-                              height: 30.h,width: 100.h,decoration: BoxDecoration(color: Color(0xff212743),
-                                borderRadius: BorderRadius.circular(10.r)),
-                              child: Center(child: Text("KI3847987 ",style: TextStyle(color: Colors.white, fontFamily: "Roboto-regular", fontSize: 12.sp,))),),
-                            SizedBox(width: 16.w,),
-                            Text("11.30Am",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                            Text("50 ADX",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 14.sp,)),
+                            Text("Direct Bonus",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
                           ],),
+                        SizedBox(width: 16.w,),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("KJ4599DF",style: TextStyle(color: Color(0xff3F5FF2), fontFamily: "Roboto-regular", fontSize: 14.sp,)),
+                            Text("Abu",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
+                          ],),
+                        Spacer(),
+                        Text("11.30Am",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
                       ],),),
                 ),
               ),

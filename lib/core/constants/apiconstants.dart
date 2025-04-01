@@ -9,7 +9,7 @@ class ApiConstants{
   static String userHome = "https://adrox-node-22357d774678.herokuapp.com/api/user/home";
   static String userLending = "https://adrox-node-22357d774678.herokuapp.com/api/user/lending";
   static String lendingConfirm = "https://adrox-node-22357d774678.herokuapp.com/api/user/lending-confirmation";
-  static String lendingHistory = "https://adrox-node-22357d774678.herokuapp.com/api/user/history-api";
+  static String lendingHistory = "https://adrox-node-22357d774678.herokuapp.com/api/history/history";
   static String profitPage = "https://adrox-node-22357d774678.herokuapp.com/api/history/history-profit";
   static String profitLendingBonus = "https://adrox-node-22357d774678.herokuapp.com/api/history/history-lendingprofit";
   static String profitLendingHistory = "https://adrox-node-22357d774678.herokuapp.com/api/history/history-lendingprofithistory";

@@ -53,7 +53,7 @@ class Data {
 }
 
 class Lending {
-  List<String>? totalBonus;
+  String? totalBonus;
   String? totalLending;
 
   Lending({
@@ -62,31 +62,35 @@ class Lending {
   });
 
   factory Lending.fromJson(Map<String, dynamic> json) => Lending(
-    totalBonus: json["total_bonus"] == null ? [] : List<String>.from(json["total_bonus"]!.map((x) => x)),
+    totalBonus: json["total_bonus"],
     totalLending: json["total_lending"],
   );
 
   Map<String, dynamic> toJson() => {
-    "total_bonus": totalBonus == null ? [] : List<dynamic>.from(totalBonus!.map((x) => x)),
+    "total_bonus": totalBonus,
     "total_lending": totalLending,
   };
 }
 
 class Value {
+  String? name;
   String? title;
   String? value;
 
   Value({
+    this.name,
     this.title,
     this.value,
   });
 
   factory Value.fromJson(Map<String, dynamic> json) => Value(
+    name: json["name"],
     title: json["title"],
     value: json["value"],
   );
 
   Map<String, dynamic> toJson() => {
+    "name": name,
     "title": title,
     "value": value,
   };

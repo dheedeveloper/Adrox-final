@@ -47,7 +47,7 @@ class _InActiveTeamState extends State<InActiveTeam> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Total Lending",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                      Text("1300 ",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                      Text(value.inActiveData!.data!.lending!.totalllendig.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                     ],),
                   SizedBox(width: 25.w,),
                   VerticalDivider(indent: 15.h,endIndent: 15.h,),
@@ -57,7 +57,7 @@ class _InActiveTeamState extends State<InActiveTeam> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Total Inactive Count",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                      Text("100 ADX",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                      Text(value.inActiveData!.data!.lending!.totalinactivecount.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                     ],),
                 ],
               ),),
@@ -106,12 +106,12 @@ class _InActiveTeamState extends State<InActiveTeam> {
             Text("Today",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
             Expanded(
               child: ListView.builder(
-                itemCount: 6,
+                itemCount: value.inActiveData!.data!.history!.length,
                 itemBuilder: (context, index) => Padding(
                   padding: EdgeInsets.symmetric(vertical: 5.h),
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 15.h),
-                    height: 70.h,width: double.infinity,decoration: BoxDecoration(border: Border.all(color: Colors.black54),
+                    padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 5.h),
+                    height: 60.h,width: double.infinity,decoration: BoxDecoration(border: Border.all(color: Colors.black54),
                       borderRadius: BorderRadius.circular(15.w)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -120,20 +120,14 @@ class _InActiveTeamState extends State<InActiveTeam> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("50 ADX",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 14.sp,)),
-                                Text("Executive",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
-                              ],),
+                            Text(value.inActiveData!.data!.history![index].sponsorUsername.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 14.sp,)),
                             Spacer(),
                             Container(
                               height: 30.h,width: 100.h,decoration: BoxDecoration(color: Color(0xff212743),
                                 borderRadius: BorderRadius.circular(10.r)),
-                              child: Center(child: Text("KI3847987 ",style: TextStyle(color: Colors.white, fontFamily: "Roboto-regular", fontSize: 12.sp,))),),
+                              child: Center(child: Text(value.inActiveData!.data!.history![index].referralId.toString(),style: TextStyle(color: Colors.white, fontFamily: "Roboto-regular", fontSize: 12.sp,))),),
                             SizedBox(width: 16.w,),
-                            Text("11.30Am",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                            Text(value.inActiveData!.data!.history![index].time.toString().split(" ").first,style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
                           ],),
                       ],),),
                 ),

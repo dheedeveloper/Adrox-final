@@ -46,8 +46,8 @@ class _SecondReferralScreenState extends State<SecondReferralScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Total Pool",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                      Text("100000 USDT",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                      Text("Total Direct Bonus",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                      Text(value.secondRefData!.data!.lending!.totall2Ndlevelbonus.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                     ],),
                   SizedBox(width: 15.w,),
                   VerticalDivider(indent: 15.h,endIndent: 15.h,),
@@ -56,8 +56,8 @@ class _SecondReferralScreenState extends State<SecondReferralScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Total Members",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                      Text("100 ADX",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                      Text("Total Direct Members",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                      Text(value.secondRefData!.data!.lending!.totall2Ndlevelmembers.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                     ],),
                 ],
               ),),
@@ -107,7 +107,7 @@ class _SecondReferralScreenState extends State<SecondReferralScreen> {
             Text("Today",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
             Expanded(
               child: ListView.builder(
-                itemCount: 6,
+                itemCount: value.secondRefData!.data!.history!.length,
                 itemBuilder: (context, index) => Padding(
                   padding: EdgeInsets.symmetric(vertical: 5.h),
                   child: Container(
@@ -126,19 +126,19 @@ class _SecondReferralScreenState extends State<SecondReferralScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("50 ADX",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 14.sp,)),
-                            Text("Direct Bonus",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
+                            Text(value.secondRefData!.data!.history![index].amount.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                            Text(value.secondRefData!.data!.history![index].description.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
                           ],),
-                        SizedBox(width: 16.w,),
+                        SizedBox(width: 10.w,),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("KJ4599DF",style: TextStyle(color: Color(0xff3F5FF2), fontFamily: "Roboto-regular", fontSize: 14.sp,)),
-                            Text("Abu",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
+                            Text(value.secondRefData!.data!.history![index].referralId.toString(),style: TextStyle(color: Color(0xff3F5FF2), fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                            Text(value.secondRefData!.data!.history![index].sponsorUsername.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
                           ],),
                         Spacer(),
-                        Text("11.30Am",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                        Text(value.secondRefData!.data!.history![index].time!.toString().split(" ").first,style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
                       ],),),
                 ),
               ),

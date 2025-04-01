@@ -49,9 +49,9 @@ class _ProfitLendHistoryState extends State<ProfitLendHistory> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Total lending pool",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                        Text("100 ADX",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                        Text(value.profLendingHistoryData!.data!.lending!.totalllendigpool.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                       ],),
-                    SizedBox(width: 30.w,),
+                    SizedBox(width: 10.w,),
                     VerticalDivider(indent: 15.h,endIndent: 15.h,),
                     SizedBox(width: 20.w,),
                     Column(
@@ -59,7 +59,7 @@ class _ProfitLendHistoryState extends State<ProfitLendHistory> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Lending pools",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                        Text("100 ADX",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                        Text(value.profLendingHistoryData!.data!.lending!.lendingpools.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                       ],),
                   ],
                 ),),
@@ -108,7 +108,7 @@ class _ProfitLendHistoryState extends State<ProfitLendHistory> {
               Text("Today",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
               Expanded(
                 child: ListView.builder(
-                  itemCount: 6,
+                  itemCount: value.profLendingHistoryData!.data!.history!.length,
                   itemBuilder: (context, index) => Padding(
                     padding: EdgeInsets.symmetric(vertical: 20.h),
                     child: Container(
@@ -122,9 +122,9 @@ class _ProfitLendHistoryState extends State<ProfitLendHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text("CORE",style: TextStyle(color: Colors.black, fontFamily: "Roboto-medium", fontSize: 20.sp,)),
+                              Text(value.profLendingHistoryData!.data!.history![index].name.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-medium", fontSize: 20.sp,)),
                               Spacer(),
-                              Text("1000 ADX",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 20.sp,)),
+                              Text(value.profLendingHistoryData!.data!.history![index].amount.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 20.sp,)),
                             ],),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -138,7 +138,7 @@ class _ProfitLendHistoryState extends State<ProfitLendHistory> {
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
-                                            text: "30 ", // Top text with smaller font size
+                                            text: value.profLendingHistoryData!.data!.history![index].daysDuration.toString(), // Top text with smaller font size
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold,
@@ -147,7 +147,7 @@ class _ProfitLendHistoryState extends State<ProfitLendHistory> {
                                             ),
                                           ),
                                           TextSpan(
-                                            text: "Days", // Bottom text with larger font size
+                                            text: " Days", // Bottom text with larger font size
                                             style: TextStyle(
                                               color: Colors.black54,
                                               fontFamily: "Roboto-regular",
@@ -162,7 +162,7 @@ class _ProfitLendHistoryState extends State<ProfitLendHistory> {
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
-                                            text: "5% ", // Top text with smaller font size
+                                            text: value.profLendingHistoryData!.data!.history![index].profit.toString(), // Top text with smaller font size
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold,
@@ -171,7 +171,7 @@ class _ProfitLendHistoryState extends State<ProfitLendHistory> {
                                             ),
                                           ),
                                           TextSpan(
-                                            text: "Bonus", // Bottom text with larger font size
+                                            text: " Bonus", // Bottom text with larger font size
                                             style: TextStyle(
                                               color: Colors.black54,
                                               fontFamily: "Roboto-regular",
@@ -206,7 +206,7 @@ class _ProfitLendHistoryState extends State<ProfitLendHistory> {
                                       ),
                                     ),
                                     TextSpan(
-                                      text: "0X98DFY887SD8...FHJF", // Bottom text with larger font size
+                                      text: value.profLendingHistoryData!.data!.history![index].hashId.toString(), // Bottom text with larger font size
                                       style: TextStyle(
                                         color: Color(0xff3F5FF2),
                                         fontFamily: "Roboto-regular",
@@ -232,7 +232,7 @@ class _ProfitLendHistoryState extends State<ProfitLendHistory> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: "11.30Am | 20 Apr 2025", // Bottom text with larger font size
+                                  text: value.profLendingHistoryData!.data!.history![index].endDate.toString(), // Bottom text with larger font size
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontFamily: "Roboto-regular",

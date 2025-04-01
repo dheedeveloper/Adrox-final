@@ -4,6 +4,7 @@ import 'package:adrox/core/utility/Custom_Boxes.dart';
 import 'package:adrox/core/utility/images.dart';
 import 'package:adrox/core/utility/localstorage.dart';
 import 'package:adrox/core/utility/text.dart';
+import 'package:adrox/screens/Landing/homemenu/model/homescreenmodel.dart';
 import 'package:adrox/screens/Landing/homemenu/view/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/utility/Custom_text.dart';
+import '../../../Landing/homemenu/controller/homescreencontroller.dart';
 import '../../creatAccount/view/verifyscreen.dart';
 import '../controller/signincontroller.dart';
 
@@ -26,24 +28,52 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final walletAddress = TextEditingController();
   final mnemonicKey = TextEditingController();
+
   void verifyScreen() async {
     final signInController = Provider.of<SignInController>(context, listen: false);
 
-    // await signInController.signIn(walletAddress.text, mnemonicKey.text);
-    await signInController.signIn("0x500CB57fF6eb7EF34DBc694858a590B53d5E81C9",
-    "loan acid egg term rude caution cost snow oblige gorilla card angle","");
+    await signInController.signIn(
+        "0x500CB57fF6eb7EF34DBc694858a590B53d5E81C9",
+        "loan acid egg term rude caution cost snow oblige gorilla card angle",
+        ""
+    );
+
+    print("API Response: ${signInController.signInData}"); // Debugging
 
     if (signInController.signInData != null) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-      SharedPrefHelper.saveString("AuthToken", signInController.signInData!.data.toString());
-      CustomText.instance.showToastSuccess(signInController.signInData!.message.toString());
-    } else {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => VerifyScreen(
-        wallet: walletAddress.text,mnemonic: mnemonicKey.text,
-      )));
-      CustomText.instance.showToastFailure("Something went wrong !");
+      String token = signInController.signInData!.data.toString();
+      print("Token received: $token"); // Debugging
+
+      await SharedPrefHelper.saveString("AuthToken", token);
+      print("Token saved successfully!");
+
+      final homeController = Provider.of<HomeScreenController>(context, listen: false);
+      await homeController.homeApiCall(token);
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+        CustomText.instance.showToastSuccess("Login Successfully");
+      }
+    else {
+      print("Error: Sign-in data is null!");
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => VerifyScreen(
+            wallet: walletAddress.text,
+            mnemonic: mnemonicKey.text,
+          ),
+        ),
+      );
+      CustomText.instance.showToastFailure("Something went wrong!");
     }
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {

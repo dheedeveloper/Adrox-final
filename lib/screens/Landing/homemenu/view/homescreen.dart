@@ -40,14 +40,24 @@ class _HomeScreenState extends State<HomeScreen> {
   List<String> imageUrls = ['assets/images/dummy.png'];
 
   void apiCall() async {
+    print("apiCall() function called!"); // Debug print
+
     final homeController = Provider.of<HomeScreenController>(context, listen: false);
-      await homeController.homeApiCall(DynamicStrings().token);
+
+    await homeController.homeApiCall(DynamicStrings().token);
+
+    print("apiCall() function completed!"); // Debug print
   }
+
 
   @override
   void initState() {
     super.initState();
-    apiCall();
+    print("Called>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+    Future.delayed(Duration.zero, () {
+      apiCall();
+    });
   }
 
   int _selectedIndex = 0;

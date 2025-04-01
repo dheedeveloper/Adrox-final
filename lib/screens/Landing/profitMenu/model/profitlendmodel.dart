@@ -11,7 +11,7 @@ String profitLendingModelToJson(ProfitLendingModel data) => json.encode(data.toJ
 class ProfitLendingModel {
   String? status;
   String? message;
-  List<Datum>? data;
+  Data? data;
 
   ProfitLendingModel({
     this.status,
@@ -22,56 +22,76 @@ class ProfitLendingModel {
   factory ProfitLendingModel.fromJson(Map<String, dynamic> json) => ProfitLendingModel(
     status: json["status"],
     message: json["message"],
-    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+    data: json["data"] == null ? null : Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
     "message": message,
-    "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
+    "data": data?.toJson(),
   };
 }
 
-class Datum {
-  String? csqDeposit;
-  DateTime? matureDate;
-  String? hashId;
-  DateTime? createdDate;
-  String? status;
-  String? reinvestStatus;
-  String? daysDuration;
-  String? profit;
+class Data {
+  Bonus? bonus;
+  List<History>? history;
 
-  Datum({
-    this.csqDeposit,
-    this.matureDate,
-    this.hashId,
-    this.createdDate,
-    this.status,
-    this.reinvestStatus,
-    this.daysDuration,
-    this.profit,
+  Data({
+    this.bonus,
+    this.history,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-    csqDeposit: json["csq_deposit"],
-    matureDate: json["mature_date"] == null ? null : DateTime.parse(json["mature_date"]),
-    hashId: json["hash_id"],
-    createdDate: json["created_date"] == null ? null : DateTime.parse(json["created_date"]),
-    status: json["status"],
-    reinvestStatus: json["reinvest_status"],
-    daysDuration: json["days_duration"],
-    profit: json["profit"],
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+    bonus: json["bonus"] == null ? null : Bonus.fromJson(json["bonus"]),
+    history: json["History"] == null ? [] : List<History>.from(json["History"]!.map((x) => History.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
-    "csq_deposit": csqDeposit,
-    "mature_date": matureDate?.toIso8601String(),
-    "hash_id": hashId,
-    "created_date": createdDate?.toIso8601String(),
-    "status": status,
-    "reinvest_status": reinvestStatus,
-    "days_duration": daysDuration,
-    "profit": profit,
+    "bonus": bonus?.toJson(),
+    "History": history == null ? [] : List<dynamic>.from(history!.map((x) => x.toJson())),
+  };
+}
+
+class Bonus {
+  String? todaybonus;
+  String? totalbonus;
+
+  Bonus({
+    this.todaybonus,
+    this.totalbonus,
+  });
+
+  factory Bonus.fromJson(Map<String, dynamic> json) => Bonus(
+    todaybonus: json["Todaybonus"],
+    totalbonus: json["Totalbonus"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "Todaybonus": todaybonus,
+    "Totalbonus": totalbonus,
+  };
+}
+
+class History {
+  String? tokenAmount;
+  String? description;
+  DateTime? time;
+
+  History({
+    this.tokenAmount,
+    this.description,
+    this.time,
+  });
+
+  factory History.fromJson(Map<String, dynamic> json) => History(
+    tokenAmount: json["token_amount"],
+    description: json["description"],
+    time: json["time"] == null ? null : DateTime.parse(json["time"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "token_amount": tokenAmount,
+    "description": description,
+    "time": time?.toIso8601String(),
   };
 }

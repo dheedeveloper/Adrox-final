@@ -1,4 +1,3 @@
-
 // To parse this JSON data, do
 //
 //     final profitLendHistoryModel = profitLendHistoryModelFromJson(jsonString);
@@ -59,7 +58,7 @@ class History {
   String? hashId;
   DateTime? createdDate;
   DateTime? endDate;
-  int? daysDuration;
+  String? daysDuration;
   String? profit;
   bool? status;
 

@@ -51,17 +51,17 @@ class _ActiveTeamState extends State<ActiveTeam> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Total Lending",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                          Text("1300 ",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                          Text(value.activeTeamData!.data!.lending!.totalllendig.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                         ],),
-                      SizedBox(width: 25.w,),
+                      SizedBox(width: 0.w,),
                       VerticalDivider(indent: 15.h,endIndent: 15.h,),
-                      SizedBox(width: 20.w,),
+                      SizedBox(width: 0.w,),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Total Inactive Count",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                          Text("100 ADX",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                          Text(value.activeTeamData!.data!.lending!.totalactivecount.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                         ],),
                     ],
                   ),),
@@ -110,7 +110,7 @@ class _ActiveTeamState extends State<ActiveTeam> {
                 Text("Today",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 6,
+                    itemCount: value.activeTeamData!.data!.history!.length,
                     itemBuilder: (context, index) => Padding(
                       padding: EdgeInsets.symmetric(vertical: 5.h),
                       child: Container(
@@ -128,16 +128,16 @@ class _ActiveTeamState extends State<ActiveTeam> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("50 ADX",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 14.sp,)),
-                                    Text("Executive",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
+                                    Text(value.activeTeamData!.data!.history![index].amount.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 14.sp,)),
+                                    Text(value.activeTeamData!.data!.history![index].sponsorUsername.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
                                   ],),
                                 Spacer(),
                                 Container(
                                   height: 30.h,width: 100.h,decoration: BoxDecoration(color: Color(0xff212743),
                                     borderRadius: BorderRadius.circular(10.r)),
-                                  child: Center(child: Text("KI3847987 ",style: TextStyle(color: Colors.white, fontFamily: "Roboto-regular", fontSize: 12.sp,))),),
+                                  child: Center(child: Text(value.activeTeamData!.data!.history![index].referralId.toString(),style: TextStyle(color: Colors.white, fontFamily: "Roboto-regular", fontSize: 12.sp,))),),
                                 SizedBox(width: 16.w,),
-                                Text("11.30Am",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                                Text(value.activeTeamData!.data!.history![index].time.toString().split(" ").first,style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
                               ],),
                           ],),),
                     ),

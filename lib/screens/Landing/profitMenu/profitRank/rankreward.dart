@@ -53,7 +53,7 @@ class _RankRewardState extends State<RankReward> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Total Rank Reward",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                        Text("1300 ",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                        Text(value.rankData!.data!.rankrewards!.totalrankreward.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                       ],),
                     SizedBox(width: 25.w,),
                     VerticalDivider(indent: 15.h,endIndent: 15.h,),
@@ -63,7 +63,7 @@ class _RankRewardState extends State<RankReward> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Current Pool Match",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                        Text("100 ADX",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                        Text(value.rankData!.data!.rankrewards!.currentpoolmatch.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                       ],),
                   ],
                 ),),
@@ -79,7 +79,7 @@ class _RankRewardState extends State<RankReward> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Current Month Rank",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                        Text("1300 ",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                        Text(value.rankData!.data!.rankrewards!.currentmonthrank.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                       ],),
                     SizedBox(width: 20.w,),
                     VerticalDivider(indent: 15.h,endIndent: 15.h,),
@@ -89,7 +89,7 @@ class _RankRewardState extends State<RankReward> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Team lending pool",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                        Text("100 ADX",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                        Text(value.rankData!.data!.rankrewards!.rightpool.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                       ],),
                   ],
                 ),),
@@ -138,7 +138,7 @@ class _RankRewardState extends State<RankReward> {
               Text("Today",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
               Expanded(
                 child: ListView.builder(
-                  itemCount: 6,
+                  itemCount: value.rankData!.data!.history!.length,
                   itemBuilder: (context, index) => Padding(
                     padding: EdgeInsets.symmetric(vertical: 20.h),
                     child: Container(
@@ -161,22 +161,22 @@ class _RankRewardState extends State<RankReward> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("50 ADX",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 14.sp,)),
-                                  Text("Executive",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
+                                  Text(value.rankData!.data!.history![index].amount.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 14.sp,)),
+                                  Text(value.rankData!.data!.history![index].rankname.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
                                 ],),
                               const Spacer(),
-                              Text("11.30Am",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                              Text(value.rankData!.data!.history![index].createdAt.toString().split(" ").first,style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
                             ],),
                           SizedBox(height: 7.h,),
                           const Divider(),
                           SizedBox(height: 7.h,),
                           Center(
                             child: RichText(
-                              text: const TextSpan(
+                              text: TextSpan(
                                 style: TextStyle(fontSize: 16, color: Colors.black),
                                 children: [
                                   TextSpan(
-                                    text: "\$5000",
+                                    text: value.rankData!.data!.history![index].overallRankeligible.toString(),
                                     style: TextStyle(fontSize: 18, fontFamily: "Roboto-regular",fontWeight: FontWeight.bold, color: Color(0xff3F5FF2)),
                                   ),
                                   TextSpan(text: " Pool Matching",
@@ -193,9 +193,9 @@ class _RankRewardState extends State<RankReward> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                buildAmountBox("\$7500"),
+                                buildAmountBox(value.rankData!.data!.history![index].leftlegAmount.toString()),
                                 const SizedBox(width: 40),
-                                buildAmountBox("\$9500"),
+                                buildAmountBox(value.rankData!.data!.history![index].riightlegAmount.toString()),
                               ],
                             ),
                           ],

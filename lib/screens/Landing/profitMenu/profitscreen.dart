@@ -94,7 +94,7 @@ class _ProfitHomeTabState extends State<ProfitHomeTab> {
                     fontFamily: "Roboto-regular",
                     fontSize: 15.sp,
                   )),
-              Text(value.profitData!.data!.lending!.totalLending.toString(),
+              Text(value.profitData!.data!.lending!.totalBonus.toString(),
                   style: TextStyle(
                     color: Colors.black,
                     fontFamily: "Roboto-regular",

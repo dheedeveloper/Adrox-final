@@ -47,18 +47,18 @@ class _DirectTabState extends State<DirectTab> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Total Pool",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                      Text("100000 USDT",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                      Text("Total Direct Bonus",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                      Text(value.referralData!.data!.lending!.totalldirectbonus.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                     ],),
-                  SizedBox(width: 15.w,),
+                  SizedBox(width: 10.w,),
                   VerticalDivider(indent: 15.h,endIndent: 15.h,),
                   SizedBox(width: 20.w,),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Total Members",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                      Text("100 ADX",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                      Text("Total Direct Members",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                      Text(value.referralData!.data!.lending!.totaldirectmembers.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                     ],),
                 ],
               ),),
@@ -108,7 +108,7 @@ class _DirectTabState extends State<DirectTab> {
             Text("Today",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
             Expanded(
               child: ListView.builder(
-                itemCount: 6,
+                itemCount: value.referralData!.data!.history!.length,
                 itemBuilder: (context, index) => Padding(
                   padding: EdgeInsets.symmetric(vertical: 5.h),
                   child: Container(
@@ -127,19 +127,19 @@ class _DirectTabState extends State<DirectTab> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("50 ADX",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 14.sp,)),
-                            Text("Direct Bonus",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
+                            Text(value.referralData!.data!.history![index].amount.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                            Text(value.referralData!.data!.history![index].description.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
                           ],),
                         SizedBox(width: 16.w,),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("KJ4599DF",style: TextStyle(color: Color(0xff3F5FF2), fontFamily: "Roboto-regular", fontSize: 14.sp,)),
-                            Text("Abu",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
+                            Text(value.referralData!.data!.history![index].referralId.toString(),style: TextStyle(color: Color(0xff3F5FF2), fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                            Text(value.referralData!.data!.history![index].sponsorUsername.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
                           ],),
                         Spacer(),
-                        Text("11.30Am",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                        Text(value.referralData!.data!.history![index].time.toString().split(" ").first,style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
                       ],),),
                 ),
               ),

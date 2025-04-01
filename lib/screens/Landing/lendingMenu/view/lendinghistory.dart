@@ -37,7 +37,7 @@ class _LendingHistoryState extends State<LendingHistory> {
       builder: (context, value, child) => value.isLoading || value.lendingHistoryData==null? DataLoader() : Container(
         height: double.infinity,width: double.infinity.w,padding: EdgeInsets.all(20.h),
         child: Column(children: [
-          Text("Today",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+          // Text("Today",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
           SizedBox(height: 12.h,),
           SizedBox(height: 500.h,child: ListView.builder(
               itemCount: value.lendingHistoryData!.data!.length,

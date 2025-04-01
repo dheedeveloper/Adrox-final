@@ -222,7 +222,7 @@ class _LendingTabScreenState extends State<LendingTabScreen> {
                               ),
                               SizedBox(width: 10.w),
                               Text(
-                                "${value.lendingData!.data!.balance!.bnbBalance.toString()} USDT",
+                                "${value.lendingData!.data!.balance!.walletUsdSiteUsdTotal.toString()} USDT",
                                 style: TextStyle(
                                   color: Colors.black54,
                                   fontFamily: "Roboto-medium",
@@ -355,7 +355,7 @@ class _LendingTabScreenState extends State<LendingTabScreen> {
                               ),
                               SizedBox(width: 10.w),
                               Text(
-                                "${value.lendingData!.data!.balance!.walletUsdSiteUsdTotal.toString()} BNB",
+                                "${value.lendingData!.data!.balance!.walletUsdSiteUsdBnbUsdTotal.toString()} BNB",
                                 style: TextStyle(
                                   color: Colors.black54,
                                   fontFamily: "Roboto-medium",
@@ -376,11 +376,13 @@ class _LendingTabScreenState extends State<LendingTabScreen> {
                       if(amtController.text.isNotEmpty){
                         int amount = int.parse(amtController.text);
                         if(amount>=minimum&&amount<=maximum){
-                          startLending(value.lendingData!.data!.packageResults![0].id.toString(),
+                          startLending(value.lendingData!.data!.packageResults![selectedIndex].id.toString(),
                               amtController.text);
                         }else{
                           CustomText.instance.showToastFailure("Please enter valid amount");
                         }
+                      }else{
+                        CustomText.instance.showToastFailure("Please enter amount");
                       }
 
                     },

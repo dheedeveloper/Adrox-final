@@ -1,4 +1,5 @@
 import 'package:adrox/screens/Landing/profitMenu/referralscreens/directscreen.dart';
+import 'package:adrox/screens/Landing/profitMenu/referralscreens/secondreferralscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -51,9 +52,6 @@ class _ProfitReferralState extends State<ProfitReferral> with SingleTickerProvid
                       tabs: const [
                         Tab(text: "Direct"),
                         Tab(text: "Level 2",),
-                        Tab(text: "Level 3",),
-                        Tab(text: "Level 4",),
-                        Tab(text: "Level 5",),
                       ],
                     ),
                   ),
@@ -67,10 +65,7 @@ class _ProfitReferralState extends State<ProfitReferral> with SingleTickerProvid
                 controller: _tabController,
                 children: const [
                       DirectTab(),
-                      DirectTab(),
-                      DirectTab(),
-                      DirectTab(),
-                      DirectTab(),
+                      SecondReferralScreen()
                 ],
               ),
             ),

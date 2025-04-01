@@ -52,7 +52,7 @@ class _CollabScreenState extends State<CollabScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Total Collab Incentives",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                        Text("1300 ",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                        Text(value.collabData!.data!.collab!.totalcollabincentives.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                       ],),
                     VerticalDivider(indent: 15.h,endIndent: 15.h,),
                     SizedBox(width: 20.w,),
@@ -61,7 +61,7 @@ class _CollabScreenState extends State<CollabScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Current Pool Match",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
-                        Text("100 ADX",style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
+                        Text(value.collabData!.data!.collab!.currentpoolmatch.toString(),style: TextStyle(color: Color(0xff41418E), fontFamily: "Roboto-regular", fontSize: 18.sp,)),
                       ],),
                   ],
                 ),),
@@ -110,7 +110,7 @@ class _CollabScreenState extends State<CollabScreen> {
               Text("Today",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
               Expanded(
                 child: ListView.builder(
-                  itemCount: 6,
+                  itemCount: value.collabData!.data!.history!.length,
                   itemBuilder: (context, index) => Padding(
                     padding: EdgeInsets.symmetric(vertical: 20.h),
                     child: Container(
@@ -133,11 +133,11 @@ class _CollabScreenState extends State<CollabScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("50 ADX",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 14.sp,)),
-                                  Text("Executive",style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
+                                  Text(value.collabData!.data!.history![index].amount.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 14.sp,)),
+                                  Text(value.collabData!.data!.history![index].rankname.toString(),style: TextStyle(color: Colors.black, fontFamily: "Roboto-regular", fontSize: 10.sp,)),
                                 ],),
                               const Spacer(),
-                              Text("11.30Am",style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
+                              Text(value.collabData!.data!.history![index].date.toString(),style: TextStyle(color: Colors.black54, fontFamily: "Roboto-regular", fontSize: 12.sp,)),
                             ],),
                           const Divider(),
                           SizedBox(height: 4.h,),
@@ -147,7 +147,7 @@ class _CollabScreenState extends State<CollabScreen> {
                                 style: TextStyle(fontSize: 14.sp, color: Colors.black),
                                 children: [
                                   TextSpan(
-                                    text: "\$5000",
+                                    text: value.collabData!.data!.history![index].overallRankeligible.toString(),
                                     style: TextStyle(fontSize: 14.sp, fontFamily: "Roboto-regular",fontWeight: FontWeight.bold, color: Color(0xff3F5FF2)),
                                   ),
                                   TextSpan(text: " Pool Matching",
@@ -164,9 +164,9 @@ class _CollabScreenState extends State<CollabScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      buildAmountBox("\$7500"),
+                                      buildAmountBox(value.collabData!.data!.history![index].leftlegAmount.toString()),
                                       const SizedBox(width: 40),
-                                      buildAmountBox("\$9500"),
+                                      buildAmountBox(value.collabData!.data!.history![index].riightlegAmount.toString()),
                                     ],
                                   ),
                                 ],

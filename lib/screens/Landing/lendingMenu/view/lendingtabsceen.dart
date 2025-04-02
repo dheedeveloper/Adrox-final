@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'package:adrox/core/constants/apiconstants.dart';
+import 'package:http/http.dart' as http;
 import 'package:adrox/core/constants/apiservice.dart';
 import 'package:adrox/core/utility/Custom_text.dart';
+import 'package:adrox/screens/Landing/lendingMenu/model/confirmlendingmodel.dart';
 import 'package:adrox/screens/Landing/lendingMenu/view/lendinghistory.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +32,50 @@ class _LendingTabScreenState extends State<LendingTabScreen> {
     amtController.clear();
   }
 
+  ConfirmLendingModel confirmLendingModel = ConfirmLendingModel();
+  bool confirmFlag= false;
+  Future<void> lendingConfirmation(packageId,userAmt) async {
+    String url = ApiConstants.lendingConfirm;
+    setState(() {
+      confirmFlag=true;
+    });
+    // Headers
+    Map<String, String> headers = {
+      "Authorization": DynamicStrings().token,
+      "Content-Type": "application/json"
+    };
+
+    // Request body
+    Map<String, dynamic> requestBody = {
+      "package_id": packageId,
+      "user_amount": userAmt
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: headers,
+        body: jsonEncode(requestBody),
+      );
+
+      if (response.statusCode == 200) {
+        print("Success: ${response.body}");
+        setState(() {
+          confirmFlag=false;
+        });
+        if(confirmLendingModel.status==true){
+
+        }else{
+          CustomText.instance.showToastFailure(confirmLendingModel.message.toString());
+        }
+      } else {
+        print("Error: ${response.statusCode}, ${response.body}");
+      }
+    } catch (e) {
+      print("Exception: $e");
+    }
+  }
+
   int selectedIndex=0;
   int minimum=0;
   int maximum=0;
@@ -38,7 +86,7 @@ class _LendingTabScreenState extends State<LendingTabScreen> {
     return Consumer<LendingController>(builder: (context, value, child) => Scaffold(
       resizeToAvoidBottomInset: true,
       body: Consumer<ConfirmLendingController>(
-        builder: (context, confirmValue, child) => confirmValue.isLoading? DataLoader() : Container(
+        builder: (context, confirmValue, child) => confirmValue.isLoading || confirmFlag==true? DataLoader() : Container(
           height: double.infinity.h,
           width: double.infinity.w,
           padding: EdgeInsets.all(20.h),
@@ -378,22 +426,13 @@ class _LendingTabScreenState extends State<LendingTabScreen> {
                     ElevatedButton(
                         onPressed: () {
                           if(amtController.text.isNotEmpty){
-                            int amount = int.parse(amtController.text);
-                              startLending(value.lendingData!.data!.packageResults![selectedIndex].id.toString(),
-                                  amtController.text);
-                                print("object>>>>>>>>>11>");
-                                if(confirmValue.confirmLendingData==null){
-                                  print("object>>>>>>>>>>333");
-                                    DataLoader();
-                                }else{
-                              if(confirmValue.confirmLendingData!.status=="false"){
-                                print("object>>>>>>>>>>3444433");
-                                CustomText.instance.showToastFailure(confirmValue.confirmLendingData!.message!.toString());
-                              }else{
-                                print("object>>>>>>>>>>222");
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => LendingHistory()));
-                              }}
-                          }else{
+                              // startLending(value.lendingData!.data!.packageResults![selectedIndex].id.toString(),
+                              //     amtController.text);
+                            lendingConfirmation(value.lendingData!.data!.packageResults![selectedIndex].id.toString(),
+                                amtController.text);
+
+                          }
+                          else{
                             CustomText.instance.showToastFailure("Please enter amount");
                           }
 

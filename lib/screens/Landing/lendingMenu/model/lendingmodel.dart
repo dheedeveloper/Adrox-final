@@ -62,7 +62,7 @@ class Balance {
   int? usdtBalance;
   int? usdtToUsdBalance;
   int? siteUsdtBalance;
-  int? siteTokenBalance;
+  double? siteTokenBalance;
   int? walletUsdSiteUsdTotal;
   int? walletUsdSiteUsdBnbUsdTotal;
 
@@ -83,7 +83,7 @@ class Balance {
     usdtBalance: json["usdt_balance"],
     usdtToUsdBalance: json["usdt_to_usd_balance"],
     siteUsdtBalance: json["site_usdt_balance"],
-    siteTokenBalance: json["site_token_balance"],
+    siteTokenBalance: json["site_token_balance"]?.toDouble(),
     walletUsdSiteUsdTotal: json["wallet_usd_site_usd_total"],
     walletUsdSiteUsdBnbUsdTotal: json["wallet_usd_site_usd_bnb_usd_total"],
   );

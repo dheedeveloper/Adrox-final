@@ -33,8 +33,8 @@ class _SignInScreenState extends State<SignInScreen> {
     final signInController = Provider.of<SignInController>(context, listen: false);
 
     await signInController.signIn(
-        "0x500CB57fF6eb7EF34DBc694858a590B53d5E81C9",
-        "loan acid egg term rude caution cost snow oblige gorilla card angle",
+        walletAddress.text,
+        mnemonicKey.text,
         ""
     );
 
@@ -233,12 +233,12 @@ class _SignInScreenState extends State<SignInScreen> {
                                 CustomBoxes.button(
                                     size: 182,
                                     onTap: () {
-                                      verifyScreen();
-                                      // if(walletAddress.text.toString()==""||mnemonicKey.text.toString()==""){
-                                      // CustomText.instance.showToastFailure("Please give details");
-                                      // }else{
-                                      //   verifyScreen();
-                                      // }
+                                      // verifyScreen();
+                                      if(walletAddress.text.toString()==""||mnemonicKey.text.toString()==""){
+                                      CustomText.instance.showToastFailure("Please give details");
+                                      }else{
+                                        verifyScreen();
+                                      }
                                     },
                                     text: "Sign In"),
                                 // ElevatedButton(

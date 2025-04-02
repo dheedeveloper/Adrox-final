@@ -15,7 +15,7 @@ class ConfirmLendingController with ChangeNotifier {
   String get errorMessage => _errorMessage;
   ConfirmLendingModel? get confirmLendingData => _confirmLendingData;
 
-  Future<void> confirmLendingApiCall(String authToken,String package_id,String user_amount,) async {
+  Future<void> confirmLendingApiCall(String authToken, String package_id, String user_amount) async {
     if (authToken.isEmpty) {
       _errorMessage = "Auth token is missing";
       notifyListeners();
@@ -25,14 +25,18 @@ class ConfirmLendingController with ChangeNotifier {
     _setLoading(true);
 
     try {
-      // Define headers
       Map<String, String> headers = {
         "Authorization": authToken,
       };
 
-      Map<String, String> requestData = {"package_id":package_id,"user_amount":user_amount};
+      Map<String, String> requestData = {
+        "package_id": package_id,
+        "user_amount": user_amount
+      };
 
-      final response = await ApiService.postRequestWithBodyHeaders(ApiConstants.lendingConfirm,requestData,headers);
+      final response = await ApiService.postRequestWithBodyHeaders(
+          ApiConstants.lendingConfirm, requestData, headers
+      );
 
       if (response != null && response is Map<String, dynamic>) {
         if (response.containsKey("error")) {
@@ -44,18 +48,18 @@ class ConfirmLendingController with ChangeNotifier {
         }
       } else {
         _errorMessage = "Unexpected response format";
+        _confirmLendingData = null;
       }
     } catch (e) {
       _errorMessage = "Network error: ${e.toString()}";
+      _confirmLendingData = null;
     }
 
     _setLoading(false);
   }
 
   void _setLoading(bool value) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _isLoading = value;
-      notifyListeners();
-    });
+    _isLoading = value;
+    notifyListeners();
   }
 }

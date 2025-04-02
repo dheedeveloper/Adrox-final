@@ -40,6 +40,8 @@ class _ProfitHomeTabState extends State<ProfitHomeTab> {
     Color(0xffc5cade),
   ];
   List conTitle = ["Lending", "Rank", "Team", "Pool", "Referral", "Collab"];
+  List conSubTitle = ["Bonus", "Rank name", "Active count", "Left pool", "Direct Income", "Today Incentive"];
+  List conSubTitle2 = ["Lending", "Current Month", "InActive count", "Right pool", "Level Income", "Total Collab Intent"];
   List viewColor = [
     Color(0xff3F5FF2),
     Color(0xffA73A3A),
@@ -148,8 +150,7 @@ class _ProfitHomeTabState extends State<ProfitHomeTab> {
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 18.w),
-                            child: Text(
-                              "Bonus",
+                            child: Text(conSubTitle[index],
                               style: TextStyle(
                                 color: Colors.black,
                                 fontFamily: "Roboto-regular",
@@ -169,8 +170,7 @@ class _ProfitHomeTabState extends State<ProfitHomeTab> {
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 18.w),
-                            child: Text(
-                              "Lending",
+                            child: Text(conSubTitle2[index],
                               style: TextStyle(
                                 color: Colors.black,
                                 fontFamily: "Roboto-regular",

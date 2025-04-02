@@ -53,8 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    print("Called>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
     Future.delayed(Duration.zero, () {
       apiCall();
     });

@@ -146,9 +146,10 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           TextField(
                             controller: verifyController,
                             decoration: InputDecoration(
-                                suffixIcon: Image.asset(
-                                  AppImage.copyImg,
-                                  height: 5,
+                                suffixIcon: Container(
+                                  height: 5.h,width: 5.h,decoration: BoxDecoration(
+                                  image: DecorationImage(image: AssetImage(AppImage.copyImg,))
+                                ),
                                 ),
                                 hintText: "Enter 2fa code",
                                 hintStyle: TextStyle(

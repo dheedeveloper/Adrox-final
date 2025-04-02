@@ -34,11 +34,13 @@ class _LendingTabScreenState extends State<LendingTabScreen> {
 
   ConfirmLendingModel confirmLendingModel = ConfirmLendingModel();
   bool confirmFlag= false;
-  Future<void> lendingConfirmation(packageId,userAmt) async {
+
+  Future<void> lendingConfirmation(packageId, userAmt) async {
     String url = ApiConstants.lendingConfirm;
     setState(() {
-      confirmFlag=true;
+      confirmFlag = true;
     });
+
     // Headers
     Map<String, String> headers = {
       "Authorization": DynamicStrings().token,
@@ -57,15 +59,23 @@ class _LendingTabScreenState extends State<LendingTabScreen> {
         headers: headers,
         body: jsonEncode(requestBody),
       );
+      print("Url >>>>>>> $url");
+      print("Request >>>>>>> $requestBody");
 
       if (response.statusCode == 200) {
         print("Success: ${response.body}");
-        setState(() {
-          confirmFlag=false;
-        });
-        if(confirmLendingModel.status==true){
 
-        }else{
+        // Parse the response
+        final Map<String, dynamic> responseData = jsonDecode(response.body);
+        confirmLendingModel = ConfirmLendingModel.fromJson(responseData); // Assuming you have a fromJson method
+
+        setState(() {
+          confirmFlag = false;
+        });
+
+        if (confirmLendingModel.status == true) {
+          print("Working >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        } else {
           CustomText.instance.showToastFailure(confirmLendingModel.message.toString());
         }
       } else {
@@ -430,7 +440,7 @@ class _LendingTabScreenState extends State<LendingTabScreen> {
                               //     amtController.text);
                             lendingConfirmation(value.lendingData!.data!.packageResults![selectedIndex].id.toString(),
                                 amtController.text);
-
+                            amtController.clear();
                           }
                           else{
                             CustomText.instance.showToastFailure("Please enter amount");

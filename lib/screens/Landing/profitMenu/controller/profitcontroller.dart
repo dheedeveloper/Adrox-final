@@ -1,8 +1,5 @@
-
-
 import 'package:adrox/screens/Landing/profitMenu/model/profitmodel.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../../../../core/constants/apiconstants.dart';
 import '../../../../core/constants/apiservice.dart';
 
@@ -22,7 +19,7 @@ class ProfitController with ChangeNotifier {
       return;
     }
 
-    _setLoading(true);
+    _setLoading(true); // ✅ Start loading before API call
 
     try {
       // Define headers
@@ -47,13 +44,11 @@ class ProfitController with ChangeNotifier {
       _errorMessage = "Network error: ${e.toString()}";
     }
 
-    _setLoading(false);
+    _setLoading(false); // ✅ Stop loading after API response
   }
 
   void _setLoading(bool value) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _isLoading = value;
-      notifyListeners();
-    });
+    _isLoading = value;
+    notifyListeners(); // ✅ Removed post frame callback
   }
 }

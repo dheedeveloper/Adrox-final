@@ -32,9 +32,14 @@ class _SignInScreenState extends State<SignInScreen> {
   void verifyScreen() async {
     final signInController = Provider.of<SignInController>(context, listen: false);
 
+    // await signInController.signIn(
+    //     walletAddress.text,
+    //     mnemonicKey.text,
+    //     ""
+    // );
     await signInController.signIn(
-        walletAddress.text,
-        mnemonicKey.text,
+        "0x500CB57fF6eb7EF34DBc694858a590B53d5E81C9",
+        "loan acid egg term rude caution cost snow oblige gorilla card angle",
         ""
     );
 
@@ -42,19 +47,17 @@ class _SignInScreenState extends State<SignInScreen> {
 
     if (signInController.signInData != null) {
       String token = signInController.signInData!.data.toString();
-      print("Token received: $token"); // Debugging
-
-      await SharedPrefHelper.saveString("AuthToken", token);
-      print("Token saved successfully!");
+      print("Token received: $token");
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()),);
+      CustomText.instance.showToastSuccess(signInController.signInData!.message.toString());
 
       final homeController = Provider.of<HomeScreenController>(context, listen: false);
       await homeController.homeApiCall(token);
 
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
-        );
-        CustomText.instance.showToastSuccess("Login Successfully");
+      await SharedPrefHelper.saveString("AuthToken", token);
+      print("Token saved successfully!");
+
+
       }
     else {
       print("Error: Sign-in data is null!");
@@ -233,12 +236,12 @@ class _SignInScreenState extends State<SignInScreen> {
                                 CustomBoxes.button(
                                     size: 182,
                                     onTap: () {
-                                      // verifyScreen();
-                                      if(walletAddress.text.toString()==""||mnemonicKey.text.toString()==""){
-                                      CustomText.instance.showToastFailure("Please give details");
-                                      }else{
-                                        verifyScreen();
-                                      }
+                                      verifyScreen();
+                                      // if(walletAddress.text.toString()==""||mnemonicKey.text.toString()==""){
+                                      // CustomText.instance.showToastFailure("Please give details");
+                                      // }else{
+                                      //   verifyScreen();
+                                      // }
                                     },
                                     text: "Sign In"),
                                 // ElevatedButton(

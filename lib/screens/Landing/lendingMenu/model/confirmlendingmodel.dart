@@ -11,7 +11,7 @@ String confirmLendingModelToJson(ConfirmLendingModel data) => json.encode(data.t
 class ConfirmLendingModel {
   String? status;
   String? message;
-  String? data;
+  Data? data;
 
   ConfirmLendingModel({
     this.status,
@@ -22,12 +22,28 @@ class ConfirmLendingModel {
   factory ConfirmLendingModel.fromJson(Map<String, dynamic> json) => ConfirmLendingModel(
     status: json["status"],
     message: json["message"],
-    data: json["data"],
+    data: json["data"] == null ? null : Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
     "message": message,
-    "data": data,
+    "data": data?.toJson(),
+  };
+}
+
+class Data {
+  String? txHash;
+
+  Data({
+    this.txHash,
+  });
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+    txHash: json["txHash"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "txHash": txHash,
   };
 }
